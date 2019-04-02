@@ -3,13 +3,13 @@
 
 Node insert(Node node, int key){
     if (node == 0){
-        //TODO
+        node = create_node(key);
     }
 
     if (key < get_key(node)){
         set_left(node, insert(get_left(node), key));
     } else if (key > get_key(node)){
-        //TODO
+        set_right(node, insert(get_right(node),key));
     } else {
         // no duplicate keys
         return node;
@@ -83,17 +83,18 @@ void print_postorder(Node node) {
   printf("%d|%d\n", node->key, node->height);
 }
 
-void unbalanced_insert(Node root, int key) {
+Node unbalanced_insert(Node root, int key) {
   if(root == 0)
   {
     root = create_node(key);
   }
   else if(key < root->key)
   {
-    unbalanced_insert(root->left_node, key);
+    root->left_node = unbalanced_insert(root->left_node, key);
   }
   else if(key > root->key)
   {
-    unbalanced_insert(root->right_node, key);
+    root->right_node = unbalanced_insert(root->right_node, key);
   }
+  return root;
 }
