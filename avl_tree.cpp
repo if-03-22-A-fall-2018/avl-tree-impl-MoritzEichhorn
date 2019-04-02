@@ -56,3 +56,44 @@ Node rotate_left(Node node){
 
     return r;
 }
+
+int max(int n1, int n2) {
+  if(n1 > n2)
+  {
+    return n1;
+  }
+  else
+  {
+    return n2;
+  }
+}
+
+Node rotate_right(Node node) {
+  return 0;
+}
+
+int get_balance(Node node) {
+  return 0;
+}
+
+void print_postorder(Node node) {
+  if(node == 0) { return; }
+  print_postorder(node->left_node);
+  print_postorder(node->right_node);
+  printf("%d|%d\n", node->key, node->height);
+}
+
+void unbalanced_insert(Node root, int key) {
+  if(root == 0)
+  {
+    root = create_node(key);
+  }
+  else if(key < root->key)
+  {
+    unbalanced_insert(root->left_node, key);
+  }
+  else if(key > root->key)
+  {
+    unbalanced_insert(root->right_node, key);
+  }
+}
