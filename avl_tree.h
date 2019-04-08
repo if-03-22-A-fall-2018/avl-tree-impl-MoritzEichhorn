@@ -12,6 +12,7 @@ int 	get_balance (Node node);
 void 	print_postorder (Node node);
 
 Node 	unbalanced_insert (Node root, int key);
+int get_depth(Node node);
 
 /**
  * Left rotates the subtree rooted with the given node

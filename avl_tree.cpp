@@ -40,6 +40,21 @@ Node insert(Node node, int key){
     return node;
 }
 
+int get_depth(Node node) {
+  if(node == 0) { return 0; }
+  if(get_left(node) == 0 && get_right(node) == 0) { return 1; }
+  int depth_left = get_depth(get_left(node));
+  int depth_right = get_depth(get_right(node));
+  if(depth_left > depth_right)
+  {
+    return 1 + depth_left;
+  }
+  else
+  {
+    return 1 + depth_right;
+  }
+}
+
 Node rotate_left(Node node){
     if (node == 0){
         return 0;
@@ -69,11 +84,23 @@ int max(int n1, int n2) {
 }
 
 Node rotate_right(Node node) {
-  return 0;
+  if (node == 0){
+      return 0;
+  }
+  Node l = get_left(node);
+  Node r = get_right(l);
+
+  set_left(node, r);
+  set_right(l, node);
+
+  set_height(node, max(get_height(get_left(node)), get_height(get_right(node))) + 1);
+  set_height(r, max(get_height(get_left(r)), get_height(get_right(r))) + 1);
+
+  return l;
 }
 
 int get_balance(Node node) {
-  return 0;
+  return get_depth(node->left_node) - get_depth(node->right_node);
 }
 
 void print_postorder(Node node) {
